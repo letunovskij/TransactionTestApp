@@ -1,6 +1,6 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using TransactionTestApp.Abstractions.Transactions;
-using TransactionTestApp.Data;
+using TransactionTestApp.Common.Exceptions;
 using TransactionTestApp.Models.ClientDtos;
 using TransactionTestApp.Models.ViewModels;
 
@@ -14,8 +14,7 @@ namespace TransactionTestApp.WebApi.Controllers
         private readonly ITransactionService _transactionService;
 
         public TransactionController(ILogger<TransactionController> logger, 
-            ITransactionService transactionService,
-            TransactionDbContext dbContext)
+            ITransactionService transactionService)
         {
             _logger = logger;
             _transactionService = transactionService;
@@ -32,6 +31,46 @@ namespace TransactionTestApp.WebApi.Controllers
         [HttpPost]
         public async Task<TransactionCreatedView> CreateTransaction(Transaction transactionDto)
         {
+            if (transactionDto.Amount <= 0)
+            {
+                var details = new Common.Responses.ProblemDetails()
+                { 
+                    RequestStatus = StatusCodes.Status400BadRequest,
+                    Title = "Ошибка при валидации входных данных",
+                    Detail = "Cумма в транзакциях должна быть всегда положительной",
+                    Instance = "TransactionAmount"
+                };
+
+                throw new BusinessErrorException(details);
+            }
+
+            if (transactionDto.TransactionDate > DateTime.UtcNow)
+            {
+                var details = new Common.Responses.ProblemDetails()
+                {
+                    RequestStatus = StatusCodes.Status400BadRequest,
+                    Title = "Ошибка при валидации входных данных",
+                    Detail = "Дата не может быть в будущем",
+                    Instance = "TransactionDate"
+                };
+
+                throw new BusinessErrorException(details);
+            }
+
+            var count = await _transactionService.GetCount();
+            if (count >= 100)
+            {
+                var details = new Common.Responses.ProblemDetails()
+                {
+                    RequestStatus = StatusCodes.Status500InternalServerError,
+                    Title = "Слишком много сущностей на сервере",
+                    Detail = "Ограничение на количество одновременно хранимых транзакций:\r\n100 штук",
+                    Instance = "Transaction"
+                };
+
+                throw new BusinessErrorException(details);
+            }
+
             var result = await _transactionService.Create(transactionDto);
 
             return result;
