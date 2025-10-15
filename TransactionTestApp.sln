@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransactionTestApp.Services
 		{DEF670EF-23CC-881C-B38E-D9AE76F24348} = {DEF670EF-23CC-881C-B38E-D9AE76F24348}
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransactionTestApp.Abstractions", "TransactionTestApp.Abstractions\TransactionTestApp.Abstractions.csproj", "{564CE3E8-172C-43A3-A4B6-0FE69A805E8C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{08E440BF-A890-49E6-A3D5-07112AA54149}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08E440BF-A890-49E6-A3D5-07112AA54149}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08E440BF-A890-49E6-A3D5-07112AA54149}.Release|Any CPU.Build.0 = Release|Any CPU
+		{564CE3E8-172C-43A3-A4B6-0FE69A805E8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{564CE3E8-172C-43A3-A4B6-0FE69A805E8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{564CE3E8-172C-43A3-A4B6-0FE69A805E8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{564CE3E8-172C-43A3-A4B6-0FE69A805E8C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -54,6 +60,7 @@ Global
 		{8C0F085C-80E4-4074-12FF-F3717EA432A6} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{DEF670EF-23CC-881C-B38E-D9AE76F24348} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{08E440BF-A890-49E6-A3D5-07112AA54149} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{564CE3E8-172C-43A3-A4B6-0FE69A805E8C} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A3F2F574-8CA1-46B3-A23A-C25B963A2F05}
